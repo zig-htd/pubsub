@@ -3,7 +3,7 @@ const mem = std.mem;
 const Io = std.Io;
 const Allocator = mem.Allocator;
 const subscriptions = @import("subscriptions.zig");
-const rc = @import("zig_rc");
+const rc = @import("rc");
 
 /// 汇总所有发布操作可选的行为，默认不保留主题消息。
 pub const PublishOptions = struct {

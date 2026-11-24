@@ -4,14 +4,14 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    const zig_rc = b.dependency("zig_rc", .{});
+    const rc = b.dependency("rc", .{});
 
-    const mod = b.addModule("zig_pubsub", .{
+    const mod = b.addModule("pubsub", .{
         .root_source_file = b.path("src/root.zig"),
         .target = target,
     });
 
-    mod.addImport("zig_rc", zig_rc.module("zig_rc"));
+    mod.addImport("rc", rc.module("rc"));
 
     // 示例是独立可执行文件，库模块仍只以 src/root.zig 为公开入口。
     const example = b.addExecutable(.{
@@ -21,12 +21,12 @@ pub fn build(b: *std.Build) void {
             .target = target,
             .optimize = optimize,
             .imports = &.{
-                .{ .name = "zig_pubsub", .module = mod },
+                .{ .name = "pubsub", .module = mod },
             },
         }),
     });
 
-    example.root_module.addImport("zig_rc", zig_rc.module("zig_rc"));
+    example.root_module.addImport("rc", rc.module("rc"));
 
     b.installArtifact(example);
 
@@ -42,8 +42,8 @@ pub fn build(b: *std.Build) void {
             .target = target,
             .optimize = optimize,
             .imports = &.{
-                .{ .name = "zig_pubsub", .module = mod },
-                .{ .name = "zig_rc", .module = zig_rc.module("zig_rc") },
+                .{ .name = "pubsub", .module = mod },
+                .{ .name = "rc", .module = rc.module("rc") },
             },
         }),
     });

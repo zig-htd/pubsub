@@ -1,7 +1,7 @@
 const std = @import("std");
 const Allocator = std.mem.Allocator;
-const pubsub = @import("zig_pubsub");
-const rc = @import("zig_rc");
+const pubsub = @import("pubsub");
+const rc = @import("rc");
 
 // 每个 union 变体代表一个主题，其载荷类型可以彼此不同。
 const Message = union(enum) {

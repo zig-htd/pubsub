@@ -1,5 +1,5 @@
 const std = @import("std");
-const pubsub = @import("zig_pubsub");
+const pubsub = @import("pubsub");
 
 const Event = union(enum) { number: u32, signal: void };
 const Bus = pubsub.Bus(Event);
